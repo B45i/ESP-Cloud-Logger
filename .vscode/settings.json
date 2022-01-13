@@ -1,0 +1,10 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": false,
+    "colorize.languages": ["typescript", "javascript", "css", "scss"],
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "[typescriptreact]": {
+        "editor.formatOnSave": true
+    }
+}

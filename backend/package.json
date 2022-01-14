@@ -5,10 +5,11 @@
     "main": "build/index.ts",
     "scripts": {
         "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts",
+        "start": "node build/index.js",
         "build": "tsc",
-        "start": "node ./build/index.js"
+        "postinstall": "npm run build"
     },
-    "author": "",
+    "author": "B45i",
     "license": "ISC",
     "dependencies": {
         "cors": "^2.8.5",

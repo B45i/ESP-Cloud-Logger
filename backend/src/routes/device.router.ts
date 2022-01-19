@@ -1,7 +1,9 @@
-import express, { Request, Response } from 'express';
+import { Router, Request, Response, request } from 'express';
 
-export const deviceRouter = express.Router();
+const router: Router = Router();
 
-deviceRouter.get('/', async (req: Request, res: Response) => {
-    res.send('device hello');
+router.get('/', async (request: Request, response: Response) => {
+    return response.send('device working');
 });
+
+export default router;

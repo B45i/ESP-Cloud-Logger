@@ -2,7 +2,8 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { deviceRouter } from './routes/device.router';
+
+import deviceRouter from './routes/device.router';
 
 dotenv.config();
 

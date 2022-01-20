@@ -4,12 +4,15 @@ import cors from 'cors';
 import helmet from 'helmet';
 
 import deviceRouter from './routes/device.router';
+import connectDB from './config/mongodb';
 
 dotenv.config();
 
 const PORT = process.env.PORT;
 
 const app = express();
+
+connectDB();
 
 app.use(helmet());
 app.use(cors());

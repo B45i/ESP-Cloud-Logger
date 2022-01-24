@@ -2,14 +2,24 @@ import { Router, Request, Response } from 'express';
 import { check } from 'express-validator';
 import { validateRoute } from '../middleware/validate-route';
 import { IUser } from '../models/User';
-import { createUser } from '../services/user.service';
+import { register } from '../controllers/auth.controller';
 
 const router: Router = Router();
 
 router.post(
-    '/signup',
+    '/register',
     [
         check('name').isLength({ min: 3 }),
+        check('email').isEmail(),
+        check('password').isLength({ min: 6 }),
+        validateRoute,
+    ],
+    register
+);
+
+router.post(
+    '/login',
+    [
         check('email').isEmail(),
         check('password').isLength({ min: 6 }),
         validateRoute,
@@ -17,7 +27,7 @@ router.post(
     async (request: Request, response: Response) => {
         try {
             const userToCreate: IUser = request.body;
-            await createUser(userToCreate);
+            // await createUser(userToCreate);
             return response.send(userToCreate);
         } catch (error) {}
     }

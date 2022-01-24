@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { IDevice } from '../models/Device';
-import { createDevice } from '../services/device.service';
+import { createDevice } from '../controllers/device.controller';
 
 const router: Router = Router();
 

@@ -7,6 +7,7 @@ import connectDB from './config/mongodb';
 
 import deviceRouter from './routes/device.router';
 import authRouter from './routes/auth.router';
+import { errorHandler } from './middleware/error-handler';
 
 dotenv.config();
 
@@ -22,6 +23,8 @@ app.use(express.json());
 
 app.use('/api/device', deviceRouter);
 app.use('/api/auth', authRouter);
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);

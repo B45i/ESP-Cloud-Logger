@@ -1,8 +1,7 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import { check } from 'express-validator';
 import { validateRoute } from '../middleware/validate-route';
-import { IUser } from '../models/User';
-import { register } from '../controllers/auth.controller';
+import { login, register } from '../controllers/auth.controller';
 
 const router: Router = Router();
 
@@ -24,13 +23,7 @@ router.post(
         check('password').isLength({ min: 6 }),
         validateRoute,
     ],
-    async (request: Request, response: Response) => {
-        try {
-            const userToCreate: IUser = request.body;
-            // await createUser(userToCreate);
-            return response.send(userToCreate);
-        } catch (error) {}
-    }
+    login
 );
 
 export default router;

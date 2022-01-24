@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import bcrypt from 'bcrypt';
 import { IUser, User } from '../models/User';
 import { HttpError } from '../models/http-error';
 import HttpStatusCodes from 'http-status-codes';
@@ -32,6 +31,37 @@ export const register = async (
     }
 
     return response.status(HttpStatusCodes.CREATED).json({ userToCreate });
+};
+
+export const login = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+) => {
+    const { email, password } = request.body;
+    let user;
+
+    try {
+        user = await User.findOne({ email });
+    } catch (error) {
+        return next(error);
+    }
+
+    if (!user) {
+        return next(
+            new HttpError(
+                'User with given email not found',
+                HttpStatusCodes.NOT_FOUND
+            )
+        );
+    }
+
+    const passwordMatch = await (user as any).validatePassword(password);
+    if (!passwordMatch) {
+        return next(
+            new HttpError('Invalid Credentials', HttpStatusCodes.BAD_REQUEST)
+        );
+    }
 };
 
 export const signIn = async (email: string, password: string) => {

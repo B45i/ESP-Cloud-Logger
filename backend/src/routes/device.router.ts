@@ -1,9 +1,14 @@
-import { Router, Request, Response, request } from 'express';
+import { Router, Request, Response } from 'express';
+import { IDevice } from '../models/Device';
+import { createDevice } from '../services/device.service';
 
 const router: Router = Router();
 
-router.get('/', async (request: Request, response: Response) => {
-    return response.send('device working');
+router.post('/create', async (request: Request, response: Response) => {
+    const deviceToCreate: IDevice = request.body;
+    try {
+        await createDevice(deviceToCreate);
+    } catch (error) {}
 });
 
 export default router;

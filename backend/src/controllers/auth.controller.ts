@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { IUser, User } from '../models/User';
 import { HttpError } from '../models/http-error';
 import HttpStatusCodes from 'http-status-codes';
+import jwt from 'jsonwebtoken';
 
 export const register = async (
     request: Request,
@@ -56,22 +57,19 @@ export const login = async (
         );
     }
 
-    const passwordMatch = await (user as any).validatePassword(password);
-    if (!passwordMatch) {
+    const isMatch = await user.validatePassword(password);
+    if (!isMatch) {
         return next(
             new HttpError('Invalid Credentials', HttpStatusCodes.BAD_REQUEST)
         );
     }
-};
 
-export const signIn = async (email: string, password: string) => {
-    // let user!: IUser | null;
-    // try {
-    //     user = await findUserByEmail(email);
-    // } catch (error) {
-    //     throw error;
-    // }
-    // if (!user) {
-    //     throw new Error(`User Doesn't exist`);
-    // }
+    const accessToken = jwt.sign(
+        {
+            email: user.email,
+        },
+        process.env.ACCESS_TOKEN_SECRET
+    );
+
+    response.json({ accessToken });
 };

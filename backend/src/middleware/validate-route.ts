@@ -10,7 +10,7 @@ export const validateRoute = async (
     const errors = validationResult(request);
     if (!errors.isEmpty()) {
         return response
-            .status(HttpStatusCodes.BAD_REQUEST)
+            .status(HttpStatusCodes.BAD_REQUEST) // todo: use error handling mw
             .json({ errors: errors.array() });
     }
     next();

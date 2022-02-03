@@ -1,14 +1,9 @@
-import { Router, Request, Response } from 'express';
-import { IDevice } from '../models/Device';
+import { Router } from 'express';
 import { createDevice } from '../controllers/device.controller';
+import { authenticateToken } from '../middleware/authenticate-token';
 
 const router: Router = Router();
 
-router.post('/create', async (request: Request, response: Response) => {
-    const deviceToCreate: IDevice = request.body;
-    try {
-        await createDevice(deviceToCreate);
-    } catch (error) {}
-});
+router.post('/create', [authenticateToken], createDevice);
 
 export default router;

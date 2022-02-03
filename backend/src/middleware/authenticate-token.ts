@@ -1,9 +1,9 @@
-import { NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { HttpError } from '../models/http-error';
 import HttpStatusCodes from 'http-status-codes';
 import jwt, { VerifyErrors } from 'jsonwebtoken';
 
-export const authenticateToken = (
+export const authenticateToken = async (
     request: Request,
     response: Response,
     next: NextFunction
@@ -20,8 +20,6 @@ export const authenticateToken = (
         );
     }
 
-    console.log(process.env.ACCESS_TOKEN_SECRET); // todo remove
-
     jwt.verify(
         token,
         process.env.ACCESS_TOKEN_SECRET,
@@ -34,8 +32,6 @@ export const authenticateToken = (
                     )
                 );
             }
-
-            console.log(jwtPayload);
             request.user = jwtPayload;
             next();
         }

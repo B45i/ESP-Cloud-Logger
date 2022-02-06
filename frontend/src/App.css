@@ -14,3 +14,13 @@
 .page-header {
     padding: 0 1.5rem !important;
 }
+
+.page-content {
+    margin: 1rem !important;
+}
+
+/* Utils */
+
+.w-50 {
+    width: 50% !important;
+}

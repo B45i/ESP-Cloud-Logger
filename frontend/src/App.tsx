@@ -1,9 +1,13 @@
-import './App.css';
-import { Button } from 'antd';
 import PageLayout from './layout/Layout';
+import './App.css';
+import DeviceCard from './components/DeviceCard';
 
 function App() {
-    return <PageLayout />;
+    return (
+        <PageLayout>
+            <DeviceCard />
+        </PageLayout>
+    );
 }
 
 export default App;

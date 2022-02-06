@@ -1,16 +1,11 @@
 import { useState } from 'react';
-import {
-    BarChartOutlined,
-    UserOutlined,
-    WifiOutlined,
-} from '@ant-design/icons';
 
 import Menu from 'antd/es/menu';
 import Layout from 'antd/es/layout';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu, Item } = Menu;
 
-const PageLayout = () => {
+const PageLayout = (props: any) => {
     const [collapsed, setCollapsed] = useState(true);
     return (
         <Layout className="page-layout">
@@ -26,17 +21,23 @@ const PageLayout = () => {
                         defaultSelectedKeys={['1']}
                         mode="inline"
                     >
-                        <Item key="1" icon={<WifiOutlined />}>
+                        <Item
+                            key="1"
+                            icon={<i className="fa-solid fa-microchip"></i>}
+                        >
                             Devices
                         </Item>
 
-                        <Item key="2" icon={<BarChartOutlined />}>
+                        <Item
+                            key="2"
+                            icon={<i className="fa-solid fa-chart-line"></i>}
+                        >
                             Data
                         </Item>
 
                         <SubMenu
                             key="user"
-                            icon={<UserOutlined />}
+                            icon={<i className="fa-solid fa-user"></i>}
                             title="User"
                         >
                             <Menu.Item key="3">Login</Menu.Item>
@@ -46,7 +47,7 @@ const PageLayout = () => {
                 </Sider>
 
                 <Layout className="site-layout">
-                    <Content style={{ margin: '0 16px' }}></Content>
+                    <Content className="page-content">{props.children}</Content>
                     <Footer className="page-footer">B45i</Footer>
                 </Layout>
             </Layout>

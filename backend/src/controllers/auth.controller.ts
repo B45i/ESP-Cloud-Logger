@@ -68,7 +68,8 @@ export const login = async (
         {
             email: user.email,
         },
-        process.env.ACCESS_TOKEN_SECRET
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: '24h' }
     );
 
     response.json({ accessToken });

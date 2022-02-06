@@ -1,2 +1,16 @@
+@import '~antd/dist/antd.dark.css';
+
 .App {
+}
+
+.page-layout {
+    min-height: 100vh !important;
+}
+
+.page-footer {
+    text-align: center !important;
+}
+
+.page-header {
+    padding: 0 1.5rem !important;
 }

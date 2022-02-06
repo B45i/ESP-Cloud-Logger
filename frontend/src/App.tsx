@@ -1,7 +1,9 @@
 import './App.css';
+import { Button } from 'antd';
+import PageLayout from './layout/Layout';
 
 function App() {
-    return <div className="App">Hello</div>;
+    return <PageLayout />;
 }
 
 export default App;

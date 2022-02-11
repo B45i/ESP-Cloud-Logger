@@ -30,6 +30,25 @@
     width: 60px !important;
 }
 
+/* components */
+
+/* auth */
+.auth-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-form {
+    max-width: 600px;
+    flex-grow: 1;
+    margin: 1rem;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
 /* Utils */
 
 .w-50 {
@@ -46,6 +65,7 @@
 
 /* ant overrides */
 
+body,
 .ant-layout,
 .page-footer {
     background-color: #2c3338 !important;

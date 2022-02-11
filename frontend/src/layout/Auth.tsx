@@ -1,6 +1,7 @@
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import Button from 'antd/es/button';
+import notification from 'antd/es/notification';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
@@ -31,13 +32,19 @@ const Auth = (props: AuthProps) => {
     };
 
     const registerUser = async (user: User) => {
-        setLoading(true);
         try {
             const response = await axios.post(
                 'http://localhost:3330/api/auth/register',
                 user
             );
-            console.log(response.data);
+
+            if (response) {
+                notification.open({
+                    message: 'Registration success',
+                    description: 'User registered successfully, Please login',
+                });
+                navigate('/login');
+            }
         } catch (error: any) {
             setErrors(error.response.data.errors || []);
         } finally {
@@ -46,6 +53,9 @@ const Auth = (props: AuthProps) => {
     };
 
     const onFinish = (values: any) => {
+        setLoading(true);
+        setErrors([]);
+
         registerUser(values);
         // setLoading(true);
         // navigate(isRegister() ? '/login' : '/');

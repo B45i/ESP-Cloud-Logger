@@ -39,7 +39,7 @@ const Auth = (props: AuthProps) => {
             );
             console.log(response.data);
         } catch (error: any) {
-            console.error(error.response.data);
+            setErrors(error.response.data.errors || []);
         } finally {
             setLoading(false);
         }
@@ -144,6 +144,12 @@ const Auth = (props: AuthProps) => {
                         <Input.Password />
                     </Form.Item>
                 )}
+
+                {errors.map((e: any) => (
+                    <div className="ant-form-item-explain-error mb-2">
+                        {e.msg}
+                    </div>
+                ))}
 
                 <Form.Item>
                     <Button loading={loading} type="primary" htmlType="submit">

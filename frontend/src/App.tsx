@@ -11,27 +11,30 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/">
-                    {/* <PageLayout>
-                        <DeviceCard />
-                        <Button
-                            type="primary"
-                            shape="circle"
-                            size="large"
-                            className="btn-add"
-                            icon={<i className="fa-solid fa-plus"></i>}
-                        />
-                        <Modal
-                            centered
-                            title="Add New Device"
-                            visible={true}
-                            onOk={console.log}
-                            onCancel={console.log}
-                        >
-                            <DeviceEditor />
-                        </Modal>
-                    </PageLayout> */}
-                </Route>
+                <Route
+                    path="/"
+                    element={
+                        <PageLayout>
+                            <DeviceCard />
+                            <Button
+                                type="primary"
+                                shape="circle"
+                                size="large"
+                                className="btn-add"
+                                icon={<i className="fa-solid fa-plus"></i>}
+                            />
+                            <Modal
+                                centered
+                                title="Add New Device"
+                                visible={false}
+                                onOk={console.log}
+                                onCancel={console.log}
+                            >
+                                <DeviceEditor />
+                            </Modal>
+                        </PageLayout>
+                    }
+                />
                 <Route path="/login" element={<Auth mode="login" />} />
 
                 <Route path="/register" element={<Auth mode="register" />} />

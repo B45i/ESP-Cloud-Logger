@@ -1,5 +1,8 @@
 import Card from 'antd/es/card';
-import { Statistic, Row, Col, Popover, Button } from 'antd';
+import Statistic from 'antd/es/statistic';
+import Row from 'antd/es/row';
+import Col from 'antd/es/col';
+import Button from 'antd/es/button';
 
 const StatisticCol = ({ title, value, prefix, suffix }: any) => (
     <Col span={12}>

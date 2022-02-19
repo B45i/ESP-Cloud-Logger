@@ -1,56 +1,45 @@
+import Layout from 'antd/es/layout';
+import Button from 'antd/es/button';
+import Modal from 'antd/es/modal';
+import Sidebar from '../components/Sidebar';
+import DeviceEditor from '../components/DeviceEditor';
+import DeviceCard from '../components/DeviceCard';
 import { useState } from 'react';
 
-import Menu from 'antd/es/menu';
-import Layout from 'antd/es/layout';
-const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu, Item } = Menu;
+const { Header, Content, Footer } = Layout;
 
-const PageLayout = (props: any) => {
-    const [collapsed, setCollapsed] = useState(true);
+const PageLayout = () => {
+    const [showModal, setShowModal] = useState(false);
     return (
         <Layout className="page-layout">
             <Header className="page-header">ESP Data Logger</Header>
             <Layout>
-                <Sider
-                    collapsible
-                    collapsed={collapsed}
-                    onCollapse={setCollapsed}
-                >
-                    <Menu
-                        theme="dark"
-                        defaultSelectedKeys={['1']}
-                        mode="inline"
-                    >
-                        <Item
-                            key="1"
-                            icon={<i className="fa-solid fa-microchip"></i>}
-                        >
-                            Devices
-                        </Item>
-
-                        <Item
-                            key="2"
-                            icon={<i className="fa-solid fa-chart-line"></i>}
-                        >
-                            Data
-                        </Item>
-
-                        <SubMenu
-                            key="user"
-                            icon={<i className="fa-solid fa-user"></i>}
-                            title="User"
-                        >
-                            <Menu.Item key="3">Login</Menu.Item>
-                            <Menu.Item key="4">Logout</Menu.Item>
-                        </SubMenu>
-                    </Menu>
-                </Sider>
-
+                <Sidebar />
                 <Layout className="site-layout">
-                    <Content className="page-content">{props.children}</Content>
+                    <Content className="page-content">
+                        <DeviceCard />
+                    </Content>
                     <Footer className="page-footer">B45i</Footer>
                 </Layout>
             </Layout>
+
+            <Button
+                type="primary"
+                shape="circle"
+                size="large"
+                className="btn-add"
+                onClick={() => setShowModal(true)}
+                icon={<i className="fa-solid fa-plus"></i>}
+            />
+            <Modal
+                centered
+                title="Add New Device"
+                visible={showModal}
+                onOk={() => setShowModal(false)}
+                onCancel={() => setShowModal(false)}
+            >
+                <DeviceEditor />
+            </Modal>
         </Layout>
     );
 };
